@@ -11,7 +11,7 @@ const config: HardhatUserConfig = {
   networks: {
     rinkeby: {
       url: `https://rinkeby.infura.io/v3/${process.env.INFURA_API_KEY}`,
-      accounts: [process.env.ADMIN || ''],
+      accounts: process.env.ADMIN ? [process.env.ADMIN ] : [],
       chainId: 4,
     },
   },
