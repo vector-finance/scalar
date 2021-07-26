@@ -5,10 +5,8 @@ import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import {Math} from "@openzeppelin/contracts/utils/math/Math.sol";
 
-import "./interfaces/yearn/RegistryApi.sol";
-import "./interfaces/yearn/VaultApi.sol";
-
-import "hardhat/console.sol";
+import "../yearn/interfaces/RegistryApi.sol";
+import "../yearn/interfaces/VaultApi.sol";
 
 /**
  * @title Yearn Base Wrapper
@@ -289,8 +287,6 @@ abstract contract BaseWrapper {
             _bestVault.deposit(withdrawn - amount, sender);
             withdrawn = amount;
         }
-
-        console.log("withdrawn", amount);
 
         // `receiver` now has `withdrawn` tokens as balance
         if (receiver != address(this)) token.safeTransfer(receiver, withdrawn);
