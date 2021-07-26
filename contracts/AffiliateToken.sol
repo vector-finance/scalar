@@ -79,7 +79,7 @@ contract AffiliateToken is ERC20, BaseWrapper {
         }
     }
 
-    function pricePerShare() external view returns (uint256) {
+    function pricePerShare() external view virtual returns (uint256) {
         return
             (totalVaultBalance(address(this)) * 10**uint256(decimals())) /
             totalSupply();
@@ -107,7 +107,11 @@ contract AffiliateToken is ERC20, BaseWrapper {
         return deposit(type(uint256).max); // Deposit everything
     }
 
-    function deposit(uint256 amount) public returns (uint256 deposited) {
+    function deposit(uint256 amount)
+        public
+        virtual
+        returns (uint256 deposited)
+    {
         deposited = _deposit(msg.sender, address(this), amount, true); // `true` = pull from `msg.sender`
         uint256 shares = _sharesForValue(amount); // NOTE: Must be calculated after deposit is handled
         _mint(msg.sender, shares);
@@ -117,7 +121,7 @@ contract AffiliateToken is ERC20, BaseWrapper {
         return withdraw(balanceOf(msg.sender));
     }
 
-    function withdraw(uint256 shares) public returns (uint256) {
+    function withdraw(uint256 shares) public virtual returns (uint256) {
         _burn(msg.sender, shares);
         return _withdraw(address(this), msg.sender, _shareValue(shares), true); // `true` = withdraw from `bestVault`
     }
