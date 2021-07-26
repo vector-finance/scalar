@@ -3,14 +3,11 @@ pragma solidity ^0.8.5;
 
 interface IDevidendVault {
 
-    event Distribute(address indexed by, uint256 distributed);
-    event Claim(address indexed to, uint256 claimed);
+    event Distribute(address indexed token, address indexed by, uint256 distributed);
+    event Claim(address indexed token, address indexed to, uint256 claimed);
     
-    function withdrawProfitForBuyBack() external;
-    function depositScalarAfterBuyBack() external;
-
-    function accumulativeOf(address owner) external view returns (uint256);
-    function claimedOf(address owner) external view returns (uint256);
-    function claimableOf(address owner) external view returns (uint256);
-    function claim() external;
+    function accumulativeOf(address token, address owner) external view returns (uint256);
+    function claimedOf(address token, address owner) external view returns (uint256);
+    function claimableOf(address token, address owner) external view returns (uint256);
+    function claim(address token) external;
 }

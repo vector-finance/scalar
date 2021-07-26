@@ -4,13 +4,24 @@ pragma solidity ^0.8.5;
 import "./FungibleToken.sol";
 import "./interfaces/IScalar.sol";
 
-contract Scalar is FungibleToken("Scalar", "SCALAR", "1"), IScalar {
+contract Scalar is FungibleToken, IScalar {
+    
+    address public emitter;
+    
+    constructor(address _emitter) FungibleToken("Scalar", "SCALAR", "1") {
+        emitter = _emitter;
+    }
 
-    function mint(uint256 amount) external override {
+    modifier onlyEmitter() {
+        require(msg.sender == emitter);
+        _;
+    }
+
+    function mint(uint256 amount) onlyEmitter() external override {
         _mint(msg.sender, amount);
     }
 
-    function burn(uint256 amount) external override {
+    function burn(uint256 amount) onlyEmitter() external override {
         _burn(msg.sender, amount);
     }
 }

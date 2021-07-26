@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.5;
 
-import {AffiliateToken} from "./yearn/AffiliateToken.sol";
-import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import "../yearn/AffiliateToken.sol";
+import "./interfaces/IScalarVaultToken.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
-contract ScalarVaultToken is AffiliateToken {
+contract ScalarVaultToken is AffiliateToken, IScalarVaultToken {
     using SafeERC20 for IERC20;
 
     address public feeDistributor;

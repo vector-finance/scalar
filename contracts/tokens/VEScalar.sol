@@ -30,11 +30,11 @@ contract VEScalar is FungibleToken, IVEScalar {
         return super.transferFrom(from, to, amount);
     }
 
-    function mint(uint256 amount) external override {
+    function mint(uint256 amount) onlyLocker() external override {
         _mint(msg.sender, amount);
     }
 
-    function burn(uint256 amount) external override {
+    function burn(uint256 amount) onlyLocker() external override {
         _burn(msg.sender, amount);
     }
 }
