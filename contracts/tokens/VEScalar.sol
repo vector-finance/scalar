@@ -22,11 +22,11 @@ contract VEScalar is FungibleToken, IVEScalar {
         _;
     }
 
-    function transfer(address to, uint256 amount) onlyLocker() public override returns (bool success) {
+    function transfer(address to, uint256 amount) onlyLocker() public override(ERC20, IERC20) returns (bool success) {
         return super.transfer(to, amount);
     }
 
-    function transferFrom(address from, address to, uint256 amount) onlyLocker() external override returns (bool success) {
+    function transferFrom(address from, address to, uint256 amount) onlyLocker() public override(FungibleToken, IERC20) returns (bool success) {
         return super.transferFrom(from, to, amount);
     }
 
