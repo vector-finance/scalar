@@ -3,7 +3,7 @@ pragma solidity ^0.8.5;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-import "./interfaces/yearn/VaultApi.sol";
+import "./interfaces/VaultApi.sol";
 import {BaseWrapper} from "./BaseWrapper.sol";
 
 import "hardhat/console.sol";
